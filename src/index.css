@@ -5,9 +5,39 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.calculator,
+.form-item {
+  display: grid;
+  gap: 1rem;
+}
+
+.calculator {
+  padding: 5rem;
+  justify-content: center;
+}
+
+.form-item {
+  align-items: center;
+  grid-template-columns: 1fr min-content max-content;
+  padding: 1rem;
+}
+
+input {
+  height: 1.5rem;
+}
+
+button {
+  height: 2.2rem;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  background-color: transparent;
 }
