@@ -41,26 +41,32 @@ const CalcForm = () => {
         }
     }
 
-    const changeFocus = (ev:SyntheticEvent) => {
-        ev.preventDefault();
+    const changeFocus = (ev:React.KeyboardEvent<HTMLFormElement>) => {
+        if (ev.key !== 'Enter')
+            return;
         const form = ev.target as HTMLFormElement;
+        const inputs = [quantityRef, inPackRef, inPalletRef];
+        const index = form.tabIndex === 2 ? 0 : form.tabIndex + 1
+        let next = inputs[index];
+        next.current?.focus();
+        
     }
 
     return (
-        <form className="calculator" onSubmit={(ev) => {changeFocus(ev)}}>
+        <form className="calculator" onKeyPress={(ev) => {changeFocus(ev)}}>
             <div className="order form-item">
                 <label htmlFor="quantity">Ilość zamówiona w szt</label>
-                <input type="number" name="quantity" id="quantity" ref={quantityRef} onChange={calc} onFocus={handleFocus} defaultValue={"0"} tabIndex={0} />
+                <input type="number" name="quantity" id="quantity" ref={quantityRef} onChange={calc} onFocus={handleFocus} defaultValue={"0"} tabIndex={0} autoFocus/>
                 <span>szt</span>
             </div>
             <div className="pack form-item">
                 <label htmlFor="in-pack">Ilość w opakowaniu</label>
-                <input type="number" name="in-pack" id="in-pack" ref={inPackRef} onChange={calc} onFocus={handleFocus} defaultValue={"0"} tabIndex={2} />
+                <input type="number" name="in-pack" id="in-pack" ref={inPackRef} onChange={calc} onFocus={handleFocus} defaultValue={"0"} tabIndex={1} />
                 <span>szt</span>
             </div>
             <div className="pallet form-item">
                 <label htmlFor="in-pallet">Ilość opakowań na palecie</label>
-                <input type="number" name="in-pallet" id="in-pallet" ref={inPalletRef} onChange={calc} onFocus={handleFocus} defaultValue={"0"} tabIndex={1} />
+                <input type="number" name="in-pallet" id="in-pallet" ref={inPalletRef} onChange={calc} onFocus={handleFocus} defaultValue={"0"} tabIndex={2} />
                 <span>szt</span>
 
             </div>
